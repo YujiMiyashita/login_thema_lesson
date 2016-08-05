@@ -1,0 +1,31 @@
+<% provide(:title, 'Sign up') %>
+<h1>Sign up</h1>
+
+<% if @user.errors.any? %>
+  The form contains <%= pluralize(@user.errors.count, "error") %>.
+  <% @user.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+<% end %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@user) do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %><br/><br/>
+
+      <%= f.label :email %>
+      <%= f.email_field :email %><br/><br/>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %><br/><br/>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation %><br/><br/>
+
+      <%= f.submit "Create my account", class: "btn btn-primary" %><br/><br/>
+    <% end %>
+  </div>
+</div>
+
+<%= link_to 'Back', users_path %>
