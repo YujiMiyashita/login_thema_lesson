@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to new_session_path, notice: 'ユーザー登録が完了しました！'
+      redirect_to login_path, notice: 'ユーザー登録が完了しました！'
     else
       render 'new'
     end
