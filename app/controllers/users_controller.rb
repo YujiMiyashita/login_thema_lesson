@@ -12,12 +12,16 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
+    unless logged_in?
+      @user = User.new
+    else
+      redirect_to root_path
+    end
   end
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
 
@@ -42,17 +46,6 @@ class UsersController < ApplicationController
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /users/1
-  # DELETE /users/1.json
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
