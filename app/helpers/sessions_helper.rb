@@ -29,15 +29,10 @@ module SessionsHelper
   end
 
   #remember_digestをDBから削除するとともにCookiesのremember_token, user_idを削除する
-  def delete_remember(user)
-    user.forget
+  def log_out
+    current_user.forget
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
-  end
-
-
-  def log_out
-    delete_remember(current_user)
     session.delete(:user_id)
     @current_user = nil
   end
