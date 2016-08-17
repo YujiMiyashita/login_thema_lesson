@@ -15,7 +15,7 @@ module SessionsHelper
       #セッションの情報を元にユーザーを@current_userにセットする
       @current_user ||= User.find_by(id: session[:user_id])
     elsif cookies.signed[:user_id] #セッションが切れたがクッキーにuser_idが残っている時
-      user = User.find_by(id: user_id)
+      user = User.find_by(id: cookies.signed[:user_id])
       #DBにハッシュ化された:remember_digestとCookiesに暗号化された:remember_tokenが一致するかを検証
       if user && user.authenticated_token(cookies[:remember_token])
         log_in user
