@@ -4,9 +4,9 @@ module SessionsHelper
   end
 
   def remember(user)
-    #user.remember #ランダムな文字列を生成し、それをハッシュ化してremember_digestとして保存する
-    #cookies.permanent.signed[:user_id] = user.id #Cookiesにuser_idを入れる
-    #cookies.permanent[:remember_token] = user.remember_token #Cookiesにremember_tokenを入れる
+    user.remember #ランダムな文字列を生成し、それをハッシュ化してremember_digestとして保存する
+    cookies.permanent.signed[:user_id] = user.id #Cookiesにuser_idを入れる
+    cookies.permanent[:remember_token] = user.remember_token #Cookiesにremember_tokenを入れる
   end
 
   # 現在ログインしているユーザーを返す
@@ -30,9 +30,9 @@ module SessionsHelper
 
   #remember_digestをDBから削除するとともにCookiesのremember_token, user_idを削除する
   def log_out
-    #current_user.forget
-    #cookies.delete(:user_id)
-    #cookies.delete(:remember_token)
+    current_user.forget
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
     session.delete(:user_id)
     @current_user = nil
   end
