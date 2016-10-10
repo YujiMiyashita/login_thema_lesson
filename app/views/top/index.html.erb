@@ -1,11 +1,11 @@
 <h1>トップ画面</h1>
 <%= notice %>
 <% if logged_in? %>
-  <li><%= link_to "Profile", current_user %></li>
-  <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+  <li><%= link_to "プロフィール", current_user %></li>
+  <li><%= link_to "ログアウト", session_path(current_user), method: "delete" %></li>
     </ul>
   </li>
 <% else %>
-  <li><%= link_to "Log in", login_path %></li>
-  <li><%= link_to "ユーザ登録", signup_path %></li>
+  <li><%= link_to "ログイン画面へ", new_session_path %></li>
+  <li><%= link_to "ユーザ登録", new_user_path %></li>
 <% end %>
